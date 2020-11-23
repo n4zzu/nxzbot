@@ -4,6 +4,7 @@ const { Client, MessageEmbed } = require('discord.js');
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const Util = require("./utils");
 const consoleName = "[nxzbot] ";
 
 function mention_to_id(raw) {
@@ -144,7 +145,25 @@ client.on('message', message => {
             break;
         case 'howgay':
             message.delete();
-            message.reply(" You're " +  Math.floor(Math.random() * 100) + "% :rainbow: gay :rainbow:");
+            if (args[1] === undefined) {
+                  message.reply(
+                ` You're ${Math.floor(Math.random() * 100)}% gay :rainbow:`
+                );
+            } else {
+                (args[1]);
+                message.channel.send(`${Util.make_mention(Util.mention_to_id(args[1]))} You're ${Math.floor(Math.random() * 100)}% gay :rainbow:`);
+            }
+            break;
+        case "howcute":
+            message.delete();
+            if (args[1] === undefined) {
+                  message.reply(
+                ` You're ${Math.floor(Math.random() * 100)}% cute :cherry_blossom:`
+                );
+            } else {
+                (args[1]);
+                message.channel.send(`${Util.make_mention(Util.mention_to_id(args[1]))} You're ${Math.floor(Math.random() * 100)}% cute :cherry_blossom:`);
+            }
             break;
         case 'dicksize':
             message.delete();
@@ -164,9 +183,13 @@ client.on('message', message => {
                     'Nice vag retard'
                 ]
                 const RandomDickSize = Math.floor(Math.random() * dickSizeArray.length);
-                message.reply(' Your dick size is: ' + dickSizeArray[RandomDickSize]);
+                if (args[1] === undefined) {
+                    message.reply(' Your dick size is: ' + dickSizeArray[RandomDickSize]);
+                } else {
+                    (args[1]);
+                    message.channel.send(`${Util.make_mention(Util.mention_to_id(args[1]))} Your dick size is:  ` + dickSizeArray[RandomDickSize])
+                }
                 break;
-
         case "id":
             message.delete();
             if(!args[2]) return message.channel.send('Please specify a user!');
