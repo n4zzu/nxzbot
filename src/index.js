@@ -6,6 +6,12 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const consoleName = "[nxzbot] ";
 
+function mention_to_id(raw) {
+    const a = Array.from(raw).slice(2);
+    a.pop();
+    return a.join("");
+}
+
 client.on("ready", () => {
     console.log(consoleName + 'established connection to discord.\n' + consoleName + 'startup sucessful!');
 });
@@ -18,20 +24,20 @@ client.on('message', message => {
     const user = message.mentions.users.first();
 
     switch(args[0]){
-        case 'ping':
-            message.delete();
-            message.channel.send(':ping_pong: Pinging...').then(pingMessage => {
-                const startPing = message.createdTimestamp;
-                const endPing = message.createdTimestamp;
-                const pingSubtract = endPing - startPing;
-                pingMessage.edit(`:ping_pong: Pong! That took ${pingSubtract} ms.`)
-            });
-            break;
+        case "ping":
+        message.delete();
+        message.channel.send(
+        `:ping_pong: Pong! That took ${
+          message.createdTimestamp - Date.now()
+         } ms.`
+        );
+        break;
         case 'clear':
             if(!message.member.hasPermission('ADMINISTRATOR')) {
                 message.delete();
                 message.reply('You do not have permissions to use the clear command!')
                 } else {
+            message.delete();
             if(!args[1]) return message.channel.send('Please specify how many messages you would like to clear!');
             if(isNaN(args[1])) return message.channel.send( `${args[1]} is not a number!`);
             message.channel.bulkDelete(args[1]);
@@ -159,6 +165,18 @@ client.on('message', message => {
                 ]
                 const RandomDickSize = Math.floor(Math.random() * dickSizeArray.length);
                 message.reply(' Your dick size is: ' + dickSizeArray[RandomDickSize]);
+                break;
+
+        case "id":
+            message.delete();
+            if(!args[2]) return message.channel.send('Please specify a user!');
+            if (args[2] === "quiet") {
+                message.channel.send(`The ID is \`${mention_to_id(args[1])}\``);
+            } else {
+                message.channel.send(
+                `The ID of ${args[1]} is \`${mention_to_id(args[1])}\``
+                );
+            }
             break;
     }
 })
