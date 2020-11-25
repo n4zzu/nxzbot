@@ -36,11 +36,12 @@ client.on('message', message => {
         case 'clear':
             if (!message.member.hasPermission('ADMINISTRATOR')) {
                 message.delete();
-                message.reply('You do not have permissions to use the clear command!')
+                message.reply('You do not have permissions to use the clear command!');
             } else {
                 message.delete();
                 if (!args[1]) return message.channel.send('Please specify how many messages you would like to clear!');
                 if (isNaN(args[1])) return message.channel.send(`${args[1]} is not a number!`);
+                if (args[1] > 100) return message.channel.send('Please specify a number under 100!');
                 message.channel.bulkDelete(args[1]);
                 message.channel.send(`Cleared ${args[1]} message(s)`);
             }
