@@ -31,11 +31,7 @@ client.on('message', message => {
     switch (args[0]) {
         case "ping":
             message.delete();
-            message.channel.send(
-                `:ping_pong: Pong! That took ${
-          message.createdTimestamp - Date.now()
-         } ms.`
-            );
+            message.channel.send(`:ping_pong: Pong! That took ${message.createdTimestamp - Date.now()} ms.`);
             break;
         case 'clear':
             if (!message.member.hasPermission('ADMINISTRATOR')) {
@@ -207,46 +203,88 @@ client.on('message', message => {
             break;
         case 'embed':
             message.delete();
-            if (!args[3]) return message.channel.send('You need to specify a title, the colour in hex format and the description!');
-            if (args[3]) {
+            if (!args[2]) return message.channel.send('You need to specify atleast the title and description!\nUsage : ' + process.env.PREFIX + 'embed <title> <description> <colour in hex format (optional)> <image url (optional)>');
+            if (args[4]) {
                 const embed = new MessageEmbed()
                     .setTitle(args[1])
-                    .setColor(args[2])
-                    .setDescription(args[3]);
+                    .setDescription(args[2])
+                    .setColor(args[3])
+                    .setImage(args[4])
                 message.channel.send(embed);
+            } else {
+                if (args[2]) {
+                    const embed = new MessageEmbed()
+                        .setTitle(args[1])
+                        .setDescription(args[2]);
+                    message.channel.send(embed);
             }
-            break;
-        case 'help':
+        }
+        break;
+        case 'snake':
+            message.delete();
+            const embedSnake = new MessageEmbed()
+                    .setTitle('cat snake')
+                    .setFooter('cat snake')
+                    .setColor(theme)
+                    .setImage('https://media.discordapp.net/attachments/775446560694730763/780221513210396682/cet0.gif')
+                message.channel.send(embedSnake);
+        break;
+        case 'help' :
             message.delete();
             const embed = new MessageEmbed()
                     .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
                     .setColor(theme)
-                    .setDescription('ping\nclear\nav\nkick\nban\necho\nhowgay\nhowcute\ndicksize\nid\nembed');
+                    .setDescription('ping\nclear\nav\nkick\nban\necho\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
                 if (!args[1]) return message.channel.send(embed);
 
                 if (args[1] === 'ping') {
-                    const embed = new MessageEmbed()
-                    .setTitle('nxzbot help\nping')
-                    .setColor(theme)
-                    .setDescription('Returns the latency of the bot.');
-                message.channel.send(embed);
+                    message.channel.send(process.env.PREFIX + 'ping Returns the latency of the bot.');
                 } else {
                     if (args[1] === 'clear') {
-                    const embed = new MessageEmbed()
-                    .setTitle('nxzbot help\nclear')
-                    .setColor(theme)
-                    .setDescription('Clears a certain amount of messages.\nUsage: ' + process.env.PREFIX + 'clear <amount of messages to clear>');
-                    message.channel.send(embed);
+                    message.channel.send(process.env.PREFIX + 'clear Clears a certain amount of messages.\nUsage: ' + process.env.PREFIX + 'clear <amount of messages to clear>');
                     } else {
                     if (args[1] === 'av') {
-                        const embed = new MessageEmbed()
-                        .setTitle('nxzbot help\nAv')
-                        .setColor(theme)
-                        .setDescription('Shows your avatar.');
-                        message.channel.send(embed);
+                        message.channel.send(process.env.PREFIX + 'av Shows your avatar.');
+                    } else {
+                        if (args[1] === 'kick') {
+                            message.channel.send(process.env.PREFIX + 'kick will kick a user from the server.\nUsage : ' + process.env.PREFIX + 'ban <user> <reason (optional)>\nRequired permissions : Admin.')
+                        } else {
+                            if (args[1] === 'ban') {
+                                message.channel.send(process.env.PREFIX + 'ban will ban a user from the server.\nUsage : ' + process.env.PREFIX + 'ban <user> <reason (optional)>\nRequired permissions : Admin.')
+                            } else {
+                                if (args[1] === 'echo') {
+                                    message.channel.send(process.env.PREFIX + 'echo replies with the message you send.\nUsage : ' + process.env.PREFIX + 'echo <message>')
+                                } else {
+                                    if (args[1] === 'howgay') {
+                                        message.channel.send(process.env.PREFIX + 'howgay shows how gay you or another user are.\nThis is 100% accurate (most of the time).')
+                                    } else {
+                                        if (args[1] === 'howcute') {
+                                            message.channel.send(process.env.PREFIX + 'howcute shows how cute you or another user are.')
+                                        } else {
+                                            if (args[1] === 'dicksize') {
+                                                message.channel.send(process.env.PREFIX + 'dicksize shows how big your or another users dick is.')
+                                            } else {
+                                                if (args[1] === 'id') {
+                                                    message.channel.send(process.env.PREFIX + 'id returns a users id.\nUsage : ' + process.env.PREFIX + 'id <user> <quiet (optionsl)>')
+                                                } else {
+                                                    if (args[1] === 'embed') {
+                                                        message.channel.send(process.env.PREFIX + 'embed generates a custom embed.\nUsage : ' + process.env.PREFIX + 'embed <title> <description> <colour in hex format (optional)> <image url (optional)>')
+                                                    } else {
+                                                        if (args[1] === 'snake') {
+                                                            message.channel.send(process.env.PREFIX + 'snake returns snake.')
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+            break;
     }
 })
 
