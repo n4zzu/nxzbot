@@ -52,9 +52,7 @@ client.on('message', message => {
             const avatarEmbed = new MessageEmbed()
                 .setColor(theme)
                 .setAuthor(user.username + "'s avatar")
-                .setImage(user.avatarURL({
-                    dynamic: true
-                }))
+                .setImage(user.avatarURL({dynamic: true, size: 1024}))
             message.channel.send(avatarEmbed);
             //message.channel.send(user.avatarURL({dynamic:true}));
             break;
