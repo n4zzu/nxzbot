@@ -197,6 +197,31 @@ client.on('message', message => {
                 message.channel.send(`${Util.make_mention(Util.mention_to_id(args[1]))} Your dick size is:  ` + dickSizeArray[RandomDickSize])
             }
             break;
+        case '8ball':
+            const ballArray = [
+                'Yes',
+                'Of course',
+                'Indeed',
+                'I think so',
+                'Possibly',
+                'Maybe',
+                "I'm not sure",
+                "I don't know",
+                'Maybe not',
+                "I don't think so",
+                'Possibly not',
+                'No',
+                'Of course not',
+                'Not a chance'
+            ]
+            const randomBallAnswer = Math.floor(Math.random() * ballArray.length);
+            if (args[1] === undefined) {
+                message.reply(' Please ask a question!');
+            } else {
+                (args[1]);
+                message.channel.send(ballArray[randomBallAnswer]);
+            }
+        break;
         case 'id':
             message.delete();
             if (!args[2]) return message.channel.send('Please specify a user!');
@@ -241,7 +266,7 @@ client.on('message', message => {
             const embed = new MessageEmbed()
                 .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
                 .setColor(theme)
-                .setDescription('ping\nclear\nav\nkick\nban\nsay\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
+                .setDescription('ping\nclear\nav\nkick\nban\nsay\nhowgay\nhowcute\ndicksize\n8ball\nid\nembed\nsnake');
             if (!args[1]) return message.channel.send(embed);
 
             if (args[1] === 'ping') {
@@ -271,6 +296,9 @@ client.on('message', message => {
                                             if (args[1] === 'dicksize') {
                                                 message.channel.send(process.env.PREFIX + 'dicksize shows how big your or another users dick is.')
                                             } else {
+                                                if (args[1] === '8ball') {
+                                                    message.channel.send(process.env.PREFIX + '8ball gives you 100% accurate answers to your questions.')
+                                                } else {
                                                 if (args[1] === 'id') {
                                                     message.channel.send(process.env.PREFIX + 'id returns a users id.\nUsage : ' + process.env.PREFIX + 'id <user> <quiet (optionsl)>')
                                                 } else {
@@ -291,7 +319,8 @@ client.on('message', message => {
                     }
                 }
             }
-            break;
+        }
+        break;
     }
 })
 
