@@ -146,9 +146,9 @@ client.on('message', message => {
                 message.delete();
             }
             break;
-        case 'echo':
+        case 'say':
             message.delete();
-            if (!args[1]) return message.reply(`I can't echo nothing you spastic cunt.`);
+            if (!args[1]) return message.reply(`I can't say nothing you spastic cunt.`);
             let say = args.splice(1).join(" ");
             message.channel.send(say);
             break;
@@ -243,7 +243,7 @@ client.on('message', message => {
             const embed = new MessageEmbed()
                 .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
                 .setColor(theme)
-                .setDescription('ping\nclear\nav\nkick\nban\necho\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
+                .setDescription('ping\nclear\nav\nkick\nban\nsay\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
             if (!args[1]) return message.channel.send(embed);
 
             if (args[1] === 'ping') {
@@ -261,8 +261,8 @@ client.on('message', message => {
                             if (args[1] === 'ban') {
                                 message.channel.send(process.env.PREFIX + 'ban will ban a user from the server.\nUsage : ' + process.env.PREFIX + 'ban <user> <reason (optional)>\nRequired permissions : Admin.')
                             } else {
-                                if (args[1] === 'echo') {
-                                    message.channel.send(process.env.PREFIX + 'echo replies with the message you send.\nUsage : ' + process.env.PREFIX + 'echo <message>')
+                                if (args[1] === 'say') {
+                                    message.channel.send(process.env.PREFIX + 'say replies with the message you send.\nUsage : ' + process.env.PREFIX + 'say <message>')
                                 } else {
                                     if (args[1] === 'howgay') {
                                         message.channel.send(process.env.PREFIX + 'howgay shows how gay you or another user are.\nThis is 100% accurate (most of the time).')
