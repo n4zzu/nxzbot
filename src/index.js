@@ -47,7 +47,16 @@ client.on('message', message => {
             break;
         case 'av':
             message.delete();
-            message.reply(message.author.displayAvatarURL());
+            //message.reply(message.author.displayAvatarURL());
+            const user = message.mentions.users.first() || message.author;
+            const avatarEmbed = new MessageEmbed()
+                .setColor(theme)
+                .setAuthor(user.username + "'s avatar")
+                .setImage(user.avatarURL({
+                    dynamic: true
+                }))
+            message.channel.send(avatarEmbed);
+            //message.channel.send(user.avatarURL({dynamic:true}));
             break;
         case 'kick':
             //const user = message.mentions.users.first();
@@ -217,34 +226,34 @@ client.on('message', message => {
                         .setTitle(args[1])
                         .setDescription(args[2]);
                     message.channel.send(embed);
+                }
             }
-        }
-        break;
+            break;
         case 'snake':
             message.delete();
             const embedSnake = new MessageEmbed()
-                    .setTitle('cat snake')
-                    .setFooter('cat snake')
-                    .setColor(theme)
-                    .setImage('https://media.discordapp.net/attachments/775446560694730763/780221513210396682/cet0.gif')
-                message.channel.send(embedSnake);
-        break;
-        case 'help' :
+                .setTitle('cat snake')
+                .setFooter('cat snake')
+                .setColor(theme)
+                .setImage('https://media.discordapp.net/attachments/775446560694730763/780221513210396682/cet0.gif')
+            message.channel.send(embedSnake);
+            break;
+        case 'help':
             message.delete();
             const embed = new MessageEmbed()
-                    .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
-                    .setColor(theme)
-                    .setDescription('ping\nclear\nav\nkick\nban\necho\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
-                if (!args[1]) return message.channel.send(embed);
+                .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
+                .setColor(theme)
+                .setDescription('ping\nclear\nav\nkick\nban\necho\nhowgay\nhowcute\ndicksize\nid\nembed\nsnake');
+            if (!args[1]) return message.channel.send(embed);
 
-                if (args[1] === 'ping') {
-                    message.channel.send(process.env.PREFIX + 'ping Returns the latency of the bot.');
-                } else {
-                    if (args[1] === 'clear') {
+            if (args[1] === 'ping') {
+                message.channel.send(process.env.PREFIX + 'ping Returns the latency of the bot.');
+            } else {
+                if (args[1] === 'clear') {
                     message.channel.send(process.env.PREFIX + 'clear Clears a certain amount of messages.\nUsage: ' + process.env.PREFIX + 'clear <amount of messages to clear>');
-                    } else {
+                } else {
                     if (args[1] === 'av') {
-                        message.channel.send(process.env.PREFIX + 'av Shows your avatar.');
+                        message.channel.send(process.env.PREFIX + 'av Shows your or another users avatar.');
                     } else {
                         if (args[1] === 'kick') {
                             message.channel.send(process.env.PREFIX + 'kick will kick a user from the server.\nUsage : ' + process.env.PREFIX + 'ban <user> <reason (optional)>\nRequired permissions : Admin.')
