@@ -353,6 +353,10 @@ client.on('message', message => {
                 message.channel.send(embedSlap);
             }
             break;
+        case 'nigga':
+            message.delete();
+            message.channel.send('https://tenor.com/view/really-are-you-kidding-me-got-to-be-kidding-youre-kidding-me-seriously-gif-5606205');    
+        break;
         case 'help':
             message.delete();
             const embed = new MessageEmbed()
