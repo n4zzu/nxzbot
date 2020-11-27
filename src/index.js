@@ -53,7 +53,10 @@ client.on('message', message => {
             const avatarEmbed = new MessageEmbed()
                 .setColor(theme)
                 .setAuthor(user.username + "'s avatar")
-                .setImage(user.avatarURL({dynamic: true, size: 1024}))
+                .setImage(user.avatarURL({
+                    dynamic: true,
+                    size: 1024
+                }))
             message.channel.send(avatarEmbed);
             //message.channel.send(user.avatarURL({dynamic:true}));
             break;
@@ -222,7 +225,7 @@ client.on('message', message => {
                 (args[1]);
                 message.channel.send(ballArray[randomBallAnswer]);
             }
-        break;
+            break;
         case 'id':
             message.delete();
             if (!args[2]) return message.channel.send('Please specify a user!');
@@ -262,12 +265,100 @@ client.on('message', message => {
                 .setImage('https://media.discordapp.net/attachments/775446560694730763/780221513210396682/cet0.gif')
             message.channel.send(embedSnake);
             break;
+        case 'hug':
+            message.delete();
+            if (args[1] === undefined) {
+                message.reply(' You need to specify a user to hug!');
+            } else {
+                const hugArray = [
+                    'https://cdn.nekos.life/cuddle/cuddle_040.gif',
+                    'https://cdn.nekos.life/hug/hug_031.gif',
+                    'https://cdn.nekos.life/hug/hug_045.gif',
+                    'https://cdn.nekos.life/hug/hug_006.gif'
+                ]
+
+                const randomHug = Math.floor(Math.random() * hugArray.length);
+                (args[1]);
+                const embedHug = new MessageEmbed()
+                    .setTitle('nxzbot hug')
+                    .setColor(theme)
+                    .setImage(hugArray[randomHug])
+                message.reply(`hugged ${Util.make_mention(Util.mention_to_id(args[1]))}`);
+                message.channel.send(embedHug);
+            }
+            break;
+        case 'kiss':
+            message.delete();
+            if (args[1] === undefined) {
+                message.reply(' You need to specify a user to kiss!');
+            } else {
+                const kissArray = [
+                    'https://cdn.nekos.life/kiss/kiss_037.gif',
+                    'https://cdn.nekos.life/kiss/kiss_090.gif',
+                    'https://cdn.nekos.life/kiss/kiss_118.gif',
+                    'https://cdn.nekos.life/kiss/kiss_026.gif'
+                ]
+
+                const randomKiss = Math.floor(Math.random() * kissArray.length);
+                (args[1]);
+                const embedKiss = new MessageEmbed()
+                    .setTitle('nxzbot kiss')
+                    .setColor(theme)
+                    .setImage(kissArray[randomKiss])
+                message.reply(`kissed ${Util.make_mention(Util.mention_to_id(args[1]))}`);
+                message.channel.send(embedKiss);
+            }
+            break;
+        case 'pat':
+            message.delete();
+            if (args[1] === undefined) {
+                message.reply(' You need to specify a user to pat!');
+            } else {
+                const patArray = [
+                    'https://cdn.nekos.life/pat/pat_032.gif',
+                    'https://cdn.nekos.life/pat/pat_065.gif',
+                    'https://cdn.nekos.life/pat/pat_015.gif',
+                    'https://cdn.nekos.life/pat/pat_012.gif'
+                ]
+
+                const randomPat = Math.floor(Math.random() * patArray.length);
+                (args[1]);
+                const embedPat = new MessageEmbed()
+                    .setTitle('nxzbot pat')
+                    .setColor(theme)
+                    .setImage(patArray[randomPat])
+                message.reply(`pats ${Util.make_mention(Util.mention_to_id(args[1]))}`);
+                message.channel.send(embedPat);
+            }
+            break;
+        case 'slap':
+            message.delete();
+            if (args[1] === undefined) {
+                message.reply(' You need to specify a user to slap!');
+            } else {
+                const slapArray = [
+                    'https://cdn.nekos.life/slap/slap_004.gif',
+                    'https://cdn.nekos.life/slap/slap_012.gif',
+                    'https://cdn.nekos.life/slap/slap_002.gif',
+                    'https://cdn.nekos.life/slap/slap_007.gif'
+                ]
+
+                const randomSlap = Math.floor(Math.random() * slapArray.length);
+                (args[1]);
+                const embedSlap = new MessageEmbed()
+                    .setTitle('nxzbot slap')
+                    .setColor(theme)
+                    .setImage(slapArray[randomSlap])
+                message.reply(`slaps ${Util.make_mention(Util.mention_to_id(args[1]))}!`);
+                message.channel.send(embedSlap);
+            }
+            break;
         case 'help':
             message.delete();
             const embed = new MessageEmbed()
                 .setTitle('nxzbot help\nUse ' + process.env.PREFIX + 'help <option>')
                 .setColor(theme)
-                .setDescription('ping\nclear\nav\nkick\nban\nsay\nhowgay\nhowcute\ndicksize\n8ball\nid\nembed\nsnake');
+                .setDescription('ping\nclear\nav\nkick\nban\nsay\nhowgay\nhowcute\ndicksize\n8ball\nid\nembed\nsnake\nhug\npat\nslap\nkiss');
             if (!args[1]) return message.channel.send(embed);
 
             if (args[1] === 'ping') {
@@ -300,14 +391,31 @@ client.on('message', message => {
                                                 if (args[1] === '8ball') {
                                                     message.channel.send(process.env.PREFIX + '8ball gives you 100% accurate answers to your questions.')
                                                 } else {
-                                                if (args[1] === 'id') {
-                                                    message.channel.send(process.env.PREFIX + 'id returns a users id.\nUsage : ' + process.env.PREFIX + 'id <user> <quiet (optionsl)>')
-                                                } else {
-                                                    if (args[1] === 'embed') {
-                                                        message.channel.send(process.env.PREFIX + 'embed generates a custom embed.\nUsage : ' + process.env.PREFIX + 'embed <title> <description> <colour in hex format (optional)> <image url (optional)>')
+                                                    if (args[1] === 'id') {
+                                                        message.channel.send(process.env.PREFIX + 'id returns a users id.\nUsage : ' + process.env.PREFIX + 'id <user> <quiet (optionsl)>')
                                                     } else {
-                                                        if (args[1] === 'snake') {
-                                                            message.channel.send(process.env.PREFIX + 'snake returns snake.')
+                                                        if (args[1] === 'embed') {
+                                                            message.channel.send(process.env.PREFIX + 'embed generates a custom embed.\nUsage : ' + process.env.PREFIX + 'embed <title> <description> <colour in hex format (optional)> <image url (optional)>')
+                                                        } else {
+                                                            if (args[1] === 'snake') {
+                                                                message.channel.send(process.env.PREFIX + 'snake returns snake.')
+                                                            } else {
+                                                                if (args[1] === 'hug') {
+                                                                    message.channel.send(process.env.PREFIX + 'hug hugs a user.')
+                                                                } else {
+                                                                    if (args[1] === 'pat') {
+                                                                        message.channel.send(process.env.PREFIX + 'pat pats a user.')
+                                                                    } else {
+                                                                        if (args[1] === 'slap') {
+                                                                            message.channel.send(process.env.PREFIX + 'slap slaps a user.')
+                                                                        } else {
+                                                                            if (args[1] === 'kiss') {
+                                                                                message.channel.send(process.env.PREFIX + 'kiss kisses a user.')
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -320,8 +428,7 @@ client.on('message', message => {
                     }
                 }
             }
-        }
-        break;
+            break;
     }
 })
 
