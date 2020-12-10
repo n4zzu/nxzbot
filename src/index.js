@@ -357,16 +357,6 @@ client.on('message', message => {
             message.delete();
             message.channel.send('https://tenor.com/view/really-are-you-kidding-me-got-to-be-kidding-youre-kidding-me-seriously-gif-5606205');    
         break;
-        case 'swag$':
-            message.delete();
-            message.reply('swag$');
-            const swagEmbed = new MessageEmbed()
-                .setTitle('cummies')
-                .setDescription('shut up')
-                .setColor(theme)
-                .setFooter('faggot')
-            message.channel.send(swagEmbed);
-        break;
         case 'help':
             message.delete();
             const embed = new MessageEmbed()
