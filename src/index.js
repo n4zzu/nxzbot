@@ -66,9 +66,9 @@ client.on('message', message => {
             } else {
                 message.channel.send('Removed ' + args[2] + ' day(s) from ' + args[1] + "'s sub time");
             }
-<<<<<<< HEAD
+            }
             break;
-        case 'dicksize':
+            case 'dicksize':
             message.delete();
             const dickSizeArray = [
                 '8=D',
