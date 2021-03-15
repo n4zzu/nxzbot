@@ -259,14 +259,12 @@ client.on('message', message => {
 
             if (args[1] === 'ping') {
                 message.channel.send(process.env.PREFIX + 'ping Returns the latency of the bot.');
-=======
         }
         break;
         case 'info':
             if (!message.member.hasPermission('ADMINISTRATOR')) {
                 message.delete();
                 message.reply('You do not have permissions to use the removesub command!')
->>>>>>> 0b0a1da10a29406189b01e6dc8237a068df16cc7
             } else {
                 if (!args[1]) {
                     message.delete();
